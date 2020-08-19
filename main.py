@@ -7,7 +7,6 @@ import time
 
 # GLOBAL VARIABLES
 MSG_DELAY = 5  # in seconds
-getting_lyrics = True
 
 
 def main():
