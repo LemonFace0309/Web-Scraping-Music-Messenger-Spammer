@@ -6,16 +6,15 @@ import requests
 import time
 
 # GLOBAL VARIABLES
-web_URL = ""
 MSG_DELAY = 5  # in seconds
 getting_lyrics = True
 
 
 def main():
-    get_user_input()
+    web_URL = get_user_input()
     # waiting for user to switch tabs
     time.sleep(5)
-    lyrics = get_lyrics()
+    lyrics = get_lyrics(web_URL)
     print_lyrics(lyrics)
 
 
@@ -24,13 +23,11 @@ def get_user_input():
     user_input = input("Give me a song: ")
     while not re.search(pattern, user_input):  # re-prompting user if URL provided is invalid
         user_input = input("USAGE: Paste song URL link from azlyrics.com.az: ")
-    global web_URL
-    web_URL = user_input
     print("SUCCESS! You have 5 seconds to enter a chat window and place your cursor in the chat input box.")
-    return
+    return user_input
 
 
-def get_lyrics():
+def get_lyrics(web_URL):
     page = requests.get(web_URL)
     soup = BeautifulSoup(page.content, 'html.parser')
     try:
